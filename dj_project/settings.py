@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7s3(w-q))9(#ca0e16^#f*0k7i)1gckcy!jg$c2h*0-f#j92cj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -80,12 +80,20 @@ WSGI_APPLICATION = 'dj_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'maindb',
+        'USER':'ranco',
+        'PASSWORD':'Hf201701!',
+        'HOST':'/cloudsql/my-django-blog-356513:australia-southeast1:django-blog'
     }
 }
 
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
