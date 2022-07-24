@@ -1,0 +1,9 @@
+runtime: python310
+
+entrypoint: gunicorn -b :$PORT dj_project.wsgi
+
+env_variables:
+  SECRET_KEY: 'django-insecure-7s3(w-q))9(#ca0e16^#f*0k7i)1gckcy!jg$c2h*0-f#j92cj'
+  USER_EMAIL: 'xxc199548@gmail.com'
+  USER_DB: 'ranco'
+  USER_PW: 'Hf201701!'
