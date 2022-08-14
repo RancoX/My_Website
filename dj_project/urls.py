@@ -31,14 +31,14 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(
         template_name='all_users/logout.html'), name='user_logout'),
     path('password_reset/', auth_views.PasswordResetView.as_view(
-        template_name='all_users/password_reset.html',success_url = reverse_lazy("pw_reset_done")), name='password_reset'),
+        template_name='all_users/password_reset.html', success_url=reverse_lazy("pw_reset_done")), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='all_users/password_reset_done.html'), name='pw_reset_done'),
     path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
         template_name='all_users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='all_users/password_reset_complete.html'), name='password_reset_complete'),
-    
+
 ]
 
 if settings.DEBUG:

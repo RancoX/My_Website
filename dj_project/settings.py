@@ -89,14 +89,14 @@ if os.getenv('GAE_APPLICATION', None):
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'maindb',
-            'USER':os.environ.get('USER_DB'),
-            'PASSWORD':os.environ.get('USER_PW'),
-            'HOST':'/cloudsql/my-django-blog-356513:australia-southeast1:django-blog'
+            'USER': os.environ.get('USER_DB'),
+            'PASSWORD': os.environ.get('USER_PW'),
+            'HOST': '/cloudsql/my-django-blog-356513:australia-southeast1:django-blog'
         }
     }
 else:
-    # Running locally so connect to either a local Sqlite3 instance or connect 
-    # to Cloud SQL via the proxy.  To start the proxy via command line: 
+    # Running locally so connect to either a local Sqlite3 instance or connect
+    # to Cloud SQL via the proxy.  To start the proxy via command line:
     # .\cloud_sql_proxy.exe -instances="my-django-blog-356513:australia-southeast1:django-blog"=tcp:5432
     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
     # DATABASES = {
@@ -110,10 +110,10 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'maindb',
-            'USER':os.environ.get('USER_DB'),
-            'PASSWORD':os.environ.get('USER_PW'),
-            'HOST':'127.0.0.1',
-            'PORT':'5432'
+            'USER': os.environ.get('USER_DB'),
+            'PASSWORD': os.environ.get('USER_PW'),
+            'HOST': '127.0.0.1',
+            'PORT': '5432'
         }
     }
 # Password validation
@@ -140,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Brisbane'
 
 USE_I18N = True
 
@@ -151,7 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -159,20 +159,21 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # crispy form beautifying
-CRISPY_TEMPLATE_PACK='bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # change default redirect url after logged in
-LOGIN_REDIRECT_URL='blog-home'
-LOGIN_URL='user_login'
+LOGIN_REDIRECT_URL = 'blog-home'
+LOGIN_URL = 'user_login'
 
 # set where to save profile pics
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # set backend email server
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=os.environ.get('USER_EMAIL')
-EMAIL_HOST_PASSWORD=os.environ.get('USER_PW')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('USER_EMAIL')
+EMAIL_HOST_PASSWORD = os.environ.get('USER_PW')
