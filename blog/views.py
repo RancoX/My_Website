@@ -81,8 +81,10 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 def about(request):
     when = datetime.now().hour
-    if when >= 4 and when <= 11:
+    if when >= 4 and when <= 12:
         when = 'Morning'
+    elif when > 12 and when <= 19:
+        when = 'Afternoon'
     else:
         when = 'Evening'
     context = {'title': 'About Me', 'when': when}
