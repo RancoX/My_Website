@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +33,8 @@ DEBUG = True
 if os.getenv('GAE_APPLICATION', None):
     DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "https://my-django-blog-356513.ts.r.appspot.com/", "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com"]
 
 
 # Application definition
@@ -147,11 +149,17 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Google cloud storage settings
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = 'my-django-blog-356513.appspot.com'
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, "credentials.json"))
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = "https://storage.googleapis.com/my-django-blog-356513/static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -167,7 +175,7 @@ LOGIN_URL = 'user_login'
 
 # set where to save profile pics
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = "https://storage.googleapis.com/my-django-blog-356513/media"
 
 
 # set backend email server
