@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from datetime import datetime
+import os
 
 
 # dummy posts
@@ -80,7 +81,11 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def about(request):
-    context = {'title': 'About Myself'}
+    claireCoco1 = os.path.join('https://storage.cloud.google.com',
+                               'my-django-blog-356513.appspot.com', 'Coco_Claire1.jpg')
+    claireCoco = os.path.join('https://storage.cloud.google.com',
+                              'my-django-blog-356513.appspot.com', 'Coco_Claire.jpg')
+    context = {'title': 'About Myself', 'pic1': claireCoco1, 'pic': claireCoco}
     return render(request, 'blog/about.html', context=context)
 
 
