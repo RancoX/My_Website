@@ -1,14 +1,15 @@
-import re
 from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.http import Http404
 
 # messages.debug/info/success/warning/error
 
 # Create your views here.
 def register(request):
+    raise Http404
     if request.method=='POST':
         form=UserRegisterForm(request.POST)
         if form.is_valid():

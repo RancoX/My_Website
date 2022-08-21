@@ -83,9 +83,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def about(request):
     claireCoco1 = os.path.join('https://storage.cloud.google.com',
                                'my-django-blog-356513.appspot.com', 'Coco_Claire1.jpg')
-    claireCoco = os.path.join('https://storage.cloud.google.com',
-                              'my-django-blog-356513.appspot.com', 'Coco_Claire.jpg')
-    context = {'title': 'About Myself', 'pic1': claireCoco1, 'pic': claireCoco}
+    context = {'title': 'About Myself', 'pic1': claireCoco1}
     return render(request, 'blog/about.html', context=context)
 
 
@@ -99,3 +97,7 @@ def contactme(request):
         when = 'Evening'
     context = {'title': 'Contact Me', 'when': when}
     return render(request, 'blog/contactme.html', context)
+
+
+def portfolio(request):
+    return render(request, 'blog/portfolio.html')
