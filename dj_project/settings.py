@@ -150,16 +150,21 @@ USE_TZ = True
 
 
 # Google cloud storage settings
-DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+test_rx=False
+if not test_rx:
+    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    STATIC_ROOT = "https://storage.googleapis.com/my-django-blog-356513/static"
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
 GS_BUCKET_NAME = 'my-django-blog-356513.appspot.com'
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR, "credentials.json"))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 STATIC_URL = '/static/'
-STATIC_ROOT = "https://storage.googleapis.com/my-django-blog-356513/static"
+if test_rx:
+    STATIC_ROOT = '/static/' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
