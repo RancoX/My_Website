@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'all_users.apps.UsersConfig',
     'crispy_forms',
+    'crispy_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -172,7 +173,8 @@ if test_rx:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # crispy form beautifying
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # change default redirect url after logged in
 LOGIN_REDIRECT_URL = 'blog-home'
