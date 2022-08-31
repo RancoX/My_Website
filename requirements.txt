@@ -1,11 +1,14 @@
 asgiref==3.5.2
-beautifulsoup4==4.11.1
+beautifulsoup4==4.11.1     
 cachetools==5.2.0
 certifi==2022.6.15
-charset-normalizer==2.1.0
-Django==4.0.6
+charset-normalizer==2.1.0  
+crispy-bootstrap5==0.6     
+dj-database-url==1.0.0     
+Django==4.0.6  
 django-crispy-forms==1.14.0
-django-storages==1.13.1
+django-heroku==0.3.1       
+django-storages==1.13.1    
 google==3.0.0
 google-api-core==2.8.2
 google-api-python-client==2.56.0
@@ -36,3 +39,4 @@ sqlparse==0.4.2
 tzdata==2022.1
 uritemplate==4.1.1
 urllib3==1.26.11
+whitenoise==6.2.0
