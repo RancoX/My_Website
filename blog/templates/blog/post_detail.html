@@ -1,20 +1,30 @@
 {% extends 'blog/base.html' %}
 {%block content%}
+
+
+
     <article class="media content-section">
-        <img class="rounded-circle article-image" width="50" height="50" src="{{object.author.profile.image.url}}">
-        <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-            <small class="text-muted">{{ object.date_posted|date:"M d, Y \a\t G:i:s" }}</small>
-            {% if object.author == user %}
-            <div>
-                <a href="{% url 'post-update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
-                <a href="{% url 'post-delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
+    
+        <div class="container">
+            <div class="row">
+                <img class="rounded-circle article-image me-2 col-4 px-0" style="width: 60px; height: 60px;" src="{{post.author.profile.image.url}}">
+                <div class="media-body col-8">
+    
+                    <div class="article-metadata">
+                        <a class="article-title fs-3 fw-normal text-decoration-none" href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+                    </div>
+                    
+                    <a class="me-2 fst-italic text-decoration-none" style="font-size: 15px;" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                    <p class="text-muted text-nowrap bg-light border rounded-pill d-inline-block px-2 mb-0" style="font-size: 12px;">{{ post.date_posted|date:"M d, Y \a\t G:i" }}</p>
+                    <div class="mb-2">
+                        <a href="{% url 'post-update' object.id %}" class="btn btn-secondary btn-sm mt-1 mb-1">Update</a>
+                        <a href="{% url 'post-delete' object.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
+                    </div>
+                    <p class="article-content">{{ post.content }}</p>
+                </div>
             </div>
-            {%endif%}
+            
         </div>
-        <h2 class="article-title">{{ object.title }}</h2>
-        <p class="article-content">{{ object.content }}</p>
-        </div>
+        
     </article>
 {%endblock content%}
