@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import os
-from google.oauth2 import service_account
+import os, json
+
+# load in /etc/sonfig.json which works like environment variables
+with open(r'/etc/config.json', 'r') as config_file:
+    config = json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,19 +25,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY=config['SECRET_KEY'] 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # if os.getenv('GAE_APPLICATION', None):
 #     DEBUG = False
 # else:
 #     DEBUG = True
-DEBUG = True
-if os.getenv('GAE_APPLICATION', None):
-    DEBUG = False
+DEBUG = False
+
 
 ALLOWED_HOSTS = [
-    "https://my-django-blog-356513.ts.r.appspot.com/", "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com"]
+     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192"]
 
 
 # Application definition
@@ -101,24 +104,25 @@ else:
     # Running locally so connect to either a local Sqlite3 instance or connect
     # to Cloud SQL via the proxy.  To start the proxy via command line:
     # .\cloud_sql_proxy.exe -instances="my-django-blog-356513:australia-southeast1:django-blog"=tcp:5432
+    # ./cloud_sql_proxy -instances="my-django-blog-356513:australia-southeast1:django-blog"=tcp:5432
     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db.sqlite3',
-    #     }
-    # }
-
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'maindb',
-            'USER': os.environ.get('USER_DB'),
-            'PASSWORD': os.environ.get('USER_PW'),
-            'HOST': '127.0.0.1',
-            'PORT': '5432'
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': 'maindb',
+    #         'USER': os.environ.get('USER_DB'),
+    #         'PASSWORD': os.environ.get('USER_PW'),
+    #         'HOST': '127.0.0.1',
+    #         'PORT': '5432'
+    #     }
+    # }
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -150,22 +154,16 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Google cloud storage settings
-test_rx=False
-if not test_rx:
-    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    STATIC_ROOT = "https://storage.googleapis.com/my-django-blog-356513/static"
-    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+# set where to save profile pics
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
-GS_BUCKET_NAME = 'my-django-blog-356513.appspot.com'
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR, "credentials.json"))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
-if test_rx:
-    STATIC_ROOT = '/static/' 
+    
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -180,15 +178,11 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'user_login'
 
-# set where to save profile pics
-MEDIA_URL = '/media/'
-MEDIA_ROOT = "https://storage.googleapis.com/my-django-blog-356513/media"
-
 
 # set backend email server
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('USER_EMAIL')
-EMAIL_HOST_PASSWORD = os.environ.get('USER_PW')
+EMAIL_HOST_USER = config['USER_EMAIL']
+EMAIL_HOST_PASSWORD = config['USER_PW']

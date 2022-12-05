@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from datetime import datetime
 import os
+from django.conf import settings
 
 
 # dummy posts
@@ -81,8 +82,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def about(request):
-    claireCoco1 = os.path.join('https://storage.cloud.google.com',
-                               'my-django-blog-356513.appspot.com', 'Coco_Claire1.jpg')
+    claireCoco1 = settings.BASE_DIR / 'media/Coco_Claire.jpg'
     context = {'title': 'About Myself', 'pic1': claireCoco1}
     return render(request, 'blog/about.html', context=context)
 
@@ -95,7 +95,9 @@ def contactme(request):
         when = 'Afternoon'
     else:
         when = 'Evening'
-    context = {'title': 'Contact Me', 'when': when}
+
+    linkedin_pic = settings.BASE_DIR / 'media/Professional_pic.jpeg'
+    context = {'title': 'Contact Me', 'when': when, 'linkedin_pic':linkedin_pic}
     return render(request, 'blog/contactme.html', context)
 
 

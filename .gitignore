@@ -1,3 +1,6 @@
 __pycache__\
 cloud_sql_proxy.exe
 *.sqlite3
+.gitignore
+dj_venv/**
+README.md
