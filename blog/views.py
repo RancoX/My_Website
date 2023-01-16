@@ -5,7 +5,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from datetime import datetime
 import os
-from django.conf import settings
 
 
 # dummy posts
@@ -82,9 +81,9 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def about(request):
-    claireCoco1 = settings.BASE_DIR / 'media/Coco_Claire.jpg'
-    context = {'title': 'About Myself', 'pic1': claireCoco1}
-    return render(request, 'blog/about.html', context=context)
+    Coco_Claire = 'media/Coco_Claire.jpg'
+    context = {'title': 'About Myself', 'pic1': Coco_Claire}
+    return render(request, 'blog/about.html', context)
 
 
 def contactme(request):
@@ -96,7 +95,7 @@ def contactme(request):
     else:
         when = 'Evening'
 
-    linkedin_pic = settings.BASE_DIR / 'media/Professional_pic.jpeg'
+    linkedin_pic = 'media/Professional_pic.jpeg'
     context = {'title': 'Contact Me', 'when': when, 'linkedin_pic':linkedin_pic}
     return render(request, 'blog/contactme.html', context)
 
