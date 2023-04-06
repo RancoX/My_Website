@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from datetime import datetime
-import os
+import os, requests, json
 
 
 # dummy posts
@@ -102,3 +102,10 @@ def contactme(request):
 
 def portfolio(request):
     return render(request, 'blog/portfolio.html')
+
+
+def dadjoke(request):
+    res=requests.get(r'https://icanhazdadjoke.com',headers={"Accept":"application/json"})
+    joke=json.loads(res.text)['joke']
+    context={'joke':joke}
+    return render(request, 'blog/dadjoke.html',context)
