@@ -33,11 +33,11 @@ SECRET_KEY=config['SECRET_KEY']
 #     DEBUG = False
 # else:
 #     DEBUG = True
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = [
-     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192"]
+     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","2400:8907::f03c:93ff:fe09:2f6a","*"]
 
 
 # Application definition
