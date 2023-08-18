@@ -33,11 +33,11 @@ SECRET_KEY=config['SECRET_KEY']
 #     DEBUG = False
 # else:
 #     DEBUG = True
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = [
-     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","168.138.105.16"]
+     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","2400:8907::f03c:93ff:fe09:2f6a","*"]
 
 
 # Application definition
@@ -181,7 +181,7 @@ LOGIN_URL = 'user_login'
 
 # set backend email server
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config['USER_EMAIL']

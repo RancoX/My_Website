@@ -1,6 +1,0 @@
-# git files
-.git.gitignore
-
-# python files
-__pycache__/
-db.sqlite3
