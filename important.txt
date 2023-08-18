@@ -1,0 +1,13 @@
+./main.py
+./manage.py
+./django_venv/lib/python3.10/site-packages/pkg_resources/_vendor/packaging/markers.py
+./django_venv/lib/python3.10/site-packages/setuptools/_vendor/packaging/markers.py
+./django_venv/lib/python3.10/site-packages/pip/_internal/main.py
+./django_venv/lib/python3.10/site-packages/pip/_internal/cli/main.py
+./django_venv/lib/python3.10/site-packages/pip/_internal/cli/main_parser.py
+./django_venv/lib/python3.10/site-packages/pip/_vendor/distlib/manifest.py
+./django_venv/lib/python3.10/site-packages/pip/_vendor/distlib/markers.py
+./django_venv/lib/python3.10/site-packages/pip/_vendor/packaging/markers.py
+./django_venv/lib/python3.10/site-packages/pip/_vendor/platformdirs/macos.py
+./django_venv/lib/python3.10/site-packages/pip/_vendor/rich/markup.py
+./django_venv/lib/python3.10/site-packages/pip/_vendor/urllib3/packages/backports/makefile.py

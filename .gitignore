@@ -4,3 +4,4 @@ cloud_sql_proxy.exe
 .gitignore
 dj_venv/**
 README.md
+*.py[cod]

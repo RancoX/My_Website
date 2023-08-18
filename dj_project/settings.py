@@ -37,7 +37,7 @@ DEBUG = False
 
 
 ALLOWED_HOSTS = [
-     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192"]
+     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","168.138.105.16"]
 
 
 # Application definition
