@@ -11,8 +11,9 @@
   <!-- Bootstrap5 CSS -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-  <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/main.css' %}">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/65/65956.png" type="image/icon type">
+  <script src="{% static 'blog/js/main.js' %}"></script>
   {% if title %}
   <title>{{ title }}</title>
   {% else %}
@@ -20,10 +21,10 @@
   {% endif %}
 </head>
 
-<body style="min-height: 1000px;">
+<body>
   <!-- Navbar -->
 <header class="site-header">
-  <nav class="navbar navbar-expand-md fixed-top" style="background-color: #005f73;">
+  <nav class="navbar navbar-expand-md sticky-top" style="background-color: #005f73;">
       <div class="container">
           <a href="{%url 'blog-home'%}" class="navbar-brand h1 my-1 display-5 fw-normal fs-4 text-light">
             <img class="d-inline-block align-top" style="width: 30px; object-fit:contain; border-radius:2px; margin-left: 5px; margin-right: 8px; padding-bottom: 3px;"
@@ -65,7 +66,7 @@
 </header>
 
 
-  <main role="main" class="container">
+  <main role="main" class="container mt-3">
     <div class="row">
       <div class="col-md-8">
         {%if messages%}
@@ -103,10 +104,10 @@
 
 </body>
 
-<div class="navbar navbar-inverse navbar-fixed-bottom py-0 mt-5" style="background-color: rgb(52,58,64);">
+<div class="footer-fixed-bottom">
   <div class="container">
-    <p class="navbar-text my-1" style="display: inline-block; color: #ffc107;">&#x2699; Powered by Django!</p>
-    <p class="navbar-text my-1" style="display: inline-block; color: #ffc107;">&#xa9; 2023 Ranco Xu. All Rights Reserved</p>
+    <p class="navbar-text my-1">&#x2699; Powered by Django + uwsgi !</p>
+    <p class="navbar-text my-1">&#xa9; <span class="currentYear">2023</span> Ranco Xu. All Rights Reserved</p>
   </div>
 </div>
 

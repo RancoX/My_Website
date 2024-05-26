@@ -29,15 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY=config['SECRET_KEY'] 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# if os.getenv('GAE_APPLICATION', None):
-#     DEBUG = False
-# else:
-#     DEBUG = True
 DEBUG = True
 
 
 ALLOWED_HOSTS = [
-     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","2400:8907::f03c:93ff:fe09:2f6a","*"]
+     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","2400:8907::f03c:93ff:fe09:2f6a",]
 
 
 # Application definition
@@ -155,14 +151,15 @@ USE_TZ = True
 
 
 # set where to save profile pics
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [BASE_DIR / 'static/blog/js',]
     
 
 # Default primary key field type

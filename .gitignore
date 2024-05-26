@@ -1,7 +1,9 @@
-__pycache__\
+__pycache__/
 cloud_sql_proxy.exe
 *.sqlite3
 .gitignore
 dj_venv/**
+venv_*/
+*_venv/
 README.md
 *.py[cod]
