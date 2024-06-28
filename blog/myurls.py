@@ -13,4 +13,5 @@ urlpatterns = [
     path('contactme', views.contactme, name='blog-contactme'),
     path('portfolio', views.portfolio, name='blog-portfolio'),
     path('dadjoke',views.dadjoke,name='dadjoke'),
+    path('get-my-resume',views.download_resume,name='download_resume'),
 ]

@@ -2,7 +2,7 @@ body {
   background: #fafafa;
   color: #333333;
   min-height: 110vh;
-  width: 100vw;
+  width: 100%;
   position: absolute;
 }
 

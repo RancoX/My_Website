@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.http import FileResponse
+from django.conf import settings
 from .models import Post
 from datetime import datetime
 import os, requests, json
@@ -109,3 +111,11 @@ def dadjoke(request):
     joke=json.loads(res.text)['joke']
     context={'joke':joke}
     return render(request, 'blog/dadjoke.html',context)
+
+def download_resume(request):
+    file_path=settings.BASE_DIR / 'blog/resume_rancoxu_jun_2024.pdf'
+    #with open(file_path, 'rb') as pdf_file:
+        #pdf_data = pdf_file.read()
+    response = FileResponse(open(file_path,'rb'), content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="Resume_RancoXu.pdf"'
+    return response
