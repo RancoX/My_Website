@@ -27,13 +27,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv('SECRET_KEY')
 SECRET_KEY=config['SECRET_KEY'] 
+DB_INFO = config['DATABASE']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 
 ALLOWED_HOSTS = [
-     "127.0.0.1", "localhost", "www.rancoxu.com", "rancoxu.com", "172.105.161.192","2400:8907::f03c:93ff:fe09:2f6a","unimate.com.au","rancoxu.com.au","www.rancoxu.com.au"]
+     "127.0.0.1", "localhost", "172.105.161.192","2400:8907::f03c:93ff:fe09:2f6a","unimate.com.au","rancoxu.com.au","www.rancoxu.com.au"]
 
 
 # Application definition
@@ -85,41 +86,15 @@ WSGI_APPLICATION = 'dj_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-if os.getenv('GAE_APPLICATION', None):
-    # Running on production App Engine, so connect to Google Cloud SQL using the unix socket at /cloudsql/<your-cloudsql-connection string>
-    DATABASES = {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'maindb',
-            'USER': os.environ.get('USER_DB'),
-            'PASSWORD': os.environ.get('USER_PW'),
-            'HOST': '/cloudsql/my-django-blog-356513:australia-southeast1:django-blog'
-        }
-    }
-else:
-    # Running locally so connect to either a local Sqlite3 instance or connect
-    # to Cloud SQL via the proxy.  To start the proxy via command line:
-    # .\cloud_sql_proxy.exe -instances="my-django-blog-356513:australia-southeast1:django-blog"=tcp:5432
-    # ./cloud_sql_proxy -instances="my-django-blog-356513:australia-southeast1:django-blog"=tcp:5432
-    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql',
-    #         'NAME': 'maindb',
-    #         'USER': os.environ.get('USER_DB'),
-    #         'PASSWORD': os.environ.get('USER_PW'),
-    #         'HOST': '127.0.0.1',
-    #         'PORT': '5432'
-    #     }
-    # }
-# Password validation
+            'NAME': DB_INFO['NAME'],
+            'USER': DB_INFO['USER'],
+            'PASSWORD': DB_INFO['PW'],
+            'HOST': 'localhost',
+            'PORT':'5432',
+        }}
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
