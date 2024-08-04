@@ -1,7 +1,7 @@
 from django import forms
 from .seek_crawler import classifications
 
-classification_choices = [(v,k) for k,v in classifications.items()]
+classification_choices = [(k,k) for k in classifications.keys()]
 
 class SeekerForm(forms.Form):
     keyword = forms.CharField(max_length=200)
