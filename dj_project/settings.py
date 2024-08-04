@@ -30,7 +30,7 @@ SECRET_KEY=config['SECRET_KEY']
 DB_INFO = config['DATABASE']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = [
