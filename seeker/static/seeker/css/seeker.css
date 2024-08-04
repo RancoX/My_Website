@@ -1,0 +1,18 @@
+tr.row-item {
+    max-height: 2rem;
+    overflow-x: auto;
+}
+
+tr.row-item:hover {
+    font-weight: bold;
+}
+
+form p {
+    display: flex;
+    align-items: center;
+}
+
+form p label {
+  width: 30%;
+  max-width: 40%;
+}

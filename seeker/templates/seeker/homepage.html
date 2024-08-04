@@ -1,0 +1,61 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block jscss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'seeker/css/seeker.css' %}">
+    <script src="{% static 'seeker/js/seeker.js' %}"></script>
+{% endblock jscss %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section container">
+    {% if form %}
+        <div class="article-title h2">Enter job search parameters</div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    {% else %}
+    <div class="article-title h2">{{ title }}: {{outputs|length}} jobs found</div>
+    <div class="table-responsive">
+        <table class="table table-striped-columns">
+            <thead>
+                <tr class="table-dark">
+                    <th>job_id</th>
+                    <th>job_title</th>
+                    <th>isPremium</th>
+                    <th>isStandOut</th>
+                    <th>company_id</th>
+                    <th>company</th>
+                    <th>area</th>
+                    <th>areaId</th>
+                    <th>classification_id</th>
+                    <th>classification</th>
+                    <th>locationId</th>
+                    <th>location</th>
+                    <th>time_posted</th>
+                    <th>salary</th>
+                    <th>contract_type</th>
+                    <th>teaser</th>
+                    <th>bullet points</th>
+                    <th>flexibility</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for output in outputs %}
+                    <tr class="row-item">
+                            {% for cell in output.values %}
+                                {% if forloop.counter0 == 0 %}
+                                    <td><a href="https://www.seek.com.au/job/{{cell}}" target="_blank">{{ cell }}</a></td>
+                                {% else %}
+                                    <td>{{ cell }}</td>
+                                {% endif %}
+                            {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    {% endif %}
+        
+    </div>
+{% endblock content %}

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import os, json
+import json, os
 
 # load in /etc/sonfig.json which works like environment variables
 with open(r'/etc/config.json', 'r') as config_file:
@@ -30,7 +30,7 @@ SECRET_KEY=config['SECRET_KEY']
 DB_INFO = config['DATABASE']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = [
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # so that django knows where to look for corresponding html
     'blog.apps.BlogConfig',
     'all_users.apps.UsersConfig',
+    'seeker.apps.SeekerConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -92,8 +93,8 @@ DATABASES = {
             'NAME': DB_INFO['NAME'],
             'USER': DB_INFO['USER'],
             'PASSWORD': DB_INFO['PW'],
-            'HOST': 'localhost',
-            'PORT':'5432',
+            'HOST': DB_INFO.get('HOST') or 'localhost',
+            'PORT':DB_INFO.get('PORT') or 5432,
         }}
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -134,7 +135,10 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_DIRS = [BASE_DIR / 'static/blog/js',]
+STATICFILES_DIRS = [
+    BASE_DIR / 'blog/static',
+    BASE_DIR / 'seeker/static',
+    ]
     
 
 # Default primary key field type
