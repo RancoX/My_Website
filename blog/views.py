@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.http import FileResponse
 from django.conf import settings
-from .models import Post
+from .models import Post,BucketList
 from datetime import datetime
 import os, requests, json
-
+from .forms import BucketListForm
 
 # dummy posts
 # posts=[
@@ -119,3 +119,26 @@ def download_resume(request):
     response = FileResponse(open(file_path,'rb'), content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="Resume_RancoXu.pdf"'
     return response
+
+def bucket_list(request,action=None,item_id=None):
+    form = BucketListForm()
+    if request.method == 'POST':
+        if action == 'create':
+            form = BucketListForm(request.POST)
+            if form.is_valid():
+                new_item = form.save(commit=False)
+                # add in user id
+                new_item.author = request.user
+                new_item.save()
+
+        elif action == 'delete':
+            item2del = get_object_or_404(BucketList, id=item_id)
+            item2del.delete()
+
+        elif action == 'edit':
+            pass
+
+    items = BucketList.objects.all()
+
+    context = {'items': items,'form':form}
+    return render(request,'blog/bucket_list.html',context)

@@ -1,9 +1,12 @@
-{%extends 'blog/base.html'%}
-{%block content%}
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block content %}
 <h2>Good {{when}}, Ranco Here!</h2>
 <br>
 <div>
-	<img src="{{ linkedin_pic }}" class="linkedin-photo">
+	<img src="{% get_media_prefix %}Professional_pic.jpeg" class="linkedin-photo">
 </div>
 
 <div class="contact-me">

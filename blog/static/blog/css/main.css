@@ -234,3 +234,19 @@ main.container {
   align-items: center;
   color: gold;
 }
+
+.item-row {
+  display: flex;
+
+}
+
+.item-row .btns {
+  display: flex;
+  margin-right: 1rem;
+  gap: 0.5rem;
+}
+
+.item-row .item-text a {
+  text-decoration: none;
+  color: #9381ff;
+}
