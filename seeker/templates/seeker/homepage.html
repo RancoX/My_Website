@@ -20,24 +20,9 @@
         <table class="table table-striped-columns">
             <thead>
                 <tr class="table-dark">
-                    <th>job_id</th>
-                    <th>job_title</th>
-                    <th>company</th>
-                    <th>time_posted</th>
-                    <th>contract_type</th>
-                    <th>salary</th>
-                    <th>flexibility</th>
-                    <th>bullet points</th>
-                    <th>teaser</th>
-                    <th>locationId</th>
-                    <th>location</th>
-                    <th>areaId</th>
-                    <th>area</th>
-                    <th>classification_id</th>
-                    <th>classification</th>
-                    <th>company_id</th>
-                    <th>isPremium</th>
-                    <th>isStandOut</th>
+                    {% for col in outputs[0].keys %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
                 </tr>
             </thead>
             <tbody>

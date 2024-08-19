@@ -175,6 +175,10 @@ def get_all_pages(BASE_URL,headers,keyword,subclassification,location,pages_to_p
     for future in futures:
         output=future.result()
         outputs.extend(output)
+
+    # create df from outputs
+    df=create_df(outputs).sort_values(by='time_posted',ascending=False).drop_duplicates(subset='job_id')
+    outputs = df.to_dict('records')
     
     return outputs, fullname
 
