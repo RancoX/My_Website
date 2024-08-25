@@ -14,7 +14,7 @@
 				<button type="submit" class="btn btn-danger btn-sm">Delete</button>
 			</form>
 		</div>
-		<div class="item-text"><a href="{% if item.link %}{{item.link}}{% else %}#{% endif %}">{{item.author.username|capitalize}}: {{item.name}}</a></div>
+		<div class="item-text"><a href="{% if item.link %}{{item.link}}{% else %}#{% endif %}">{{item.author.username|capfirst}}: {{item.name}}</a></div>
 	</div>
 {% empty %}
 	<h5>There is no items in the bucket list yet. Add one now baby brother!</h5>

@@ -165,6 +165,6 @@ EMAIL_HOST_PASSWORD = config['USER_PW']
 
 
 AUTHENTICATION_BACKENDS = [
-    'all_users.custom_auth.IUsernameOrEmailModelBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'all_users.custom_auth.IUsernameOrEmailModelBackend',
 ]
