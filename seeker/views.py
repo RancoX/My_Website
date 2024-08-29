@@ -35,7 +35,7 @@ def seeker(request):
     return render(request,'seeker/homepage.html',context)
 
 def authenticate(request,uuid=None):
-    if request.method == 'POST':
+    if request.method == 'GET':
         # if there is uuid included in request body
         # verify existing token
         customer = SeekerCustomer.objects.get(pk=uuid)
