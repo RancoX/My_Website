@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import json, os
+import json
 
 # load in /etc/sonfig.json which works like environment variables
 with open(r'/etc/config.json', 'r') as config_file:
@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # thrid party
 ]
 
 MIDDLEWARE = [
