@@ -38,8 +38,7 @@ def authenticate(request,uuid=None):
     if request.method == 'GET':
         # if there is uuid included in request body
         # verify existing token
-        customer = SeekerCustomer.objects.get(pk=uuid)
-        print(customer)
+        customer = SeekerCustomer.objects.filter(token=uuid)
         if customer:
             # if found token, check if balance is sufficient
             if customer.used <= customer.balance:
