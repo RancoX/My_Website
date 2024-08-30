@@ -41,10 +41,8 @@ def authenticate(request,uuid=None):
         # verify existing token
         try:
             customer = SeekerCustomer.objects.get(pk=uuid)
-        except ValidationError:
-            # invalid uuid format
-            return JsonResponse({'query_allowed':False})
         except SeekerCustomer.DoesNotExist:
+            # correct format, wrong key
             return JsonResponse({'query_allowed':False})
 
         # if found token, check if balance is sufficient
