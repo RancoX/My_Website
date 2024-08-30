@@ -36,7 +36,6 @@ def seeker(request):
     return render(request,'seeker/homepage.html',context)
 
 def authenticate(request,uuid=None):
-    print(uuid,type(uuid))
     if request.method == 'GET':
         # if there is uuid included in request body
         # verify existing token
