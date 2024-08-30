@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponseNotFound
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .seek_crawler import get_all_pages, API_URL, headers, file_name_formatter
 from django.conf import settings
@@ -49,6 +49,6 @@ def authenticate(request,uuid=None):
                 return JsonResponse({'query_allowed':True,'queries_remaining':customer.balance})
             return JsonResponse({'query_allowed':False,'queries_remaining':0})
         # if not found customer
-        return HttpResponseNotFound('User token not found')
+        return JsonResponse({'query_allowed':False})
         # if no uuid, create one
 
