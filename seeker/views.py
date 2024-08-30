@@ -5,6 +5,7 @@ from .seek_crawler import get_all_pages, API_URL, headers, file_name_formatter
 from django.conf import settings
 from .forms import SeekerForm
 from .models import SeekerCustomer
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 @login_required
@@ -35,19 +36,24 @@ def seeker(request):
     return render(request,'seeker/homepage.html',context)
 
 def authenticate(request,uuid=None):
+    print(uuid,type(uuid))
     if request.method == 'GET':
         # if there is uuid included in request body
         # verify existing token
-        customer = SeekerCustomer.objects.filter(token=uuid).first()
-        if customer:
-            # if found token, check if balance is sufficient
-            if customer.used <= customer.balance:
-                customer.used += 1
-                customer.balance -= 1
-                customer.save()
-                return JsonResponse({'query_allowed':True,'queries_remaining':customer.balance})
-            return JsonResponse({'query_allowed':False,'queries_remaining':0})
-        # if not found customer
-        return JsonResponse({'query_allowed':False})
+        try:
+            customer = SeekerCustomer.objects.get(pk=uuid)
+        except ValidationError:
+            # invalid uuid format
+            return JsonResponse({'query_allowed':False})
+        except SeekerCustomer.DoesNotExist:
+            return JsonResponse({'query_allowed':False})
+
+        # if found token, check if balance is sufficient
+        if customer.used <= customer.balance:
+            customer.used += 1
+            customer.balance -= 1
+            customer.save()
+            return JsonResponse({'query_allowed':True,'queries_remaining':customer.balance})
+        return JsonResponse({'query_allowed':False,'queries_remaining':0})
         # if no uuid, create one
 
