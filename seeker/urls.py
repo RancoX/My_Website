@@ -1,6 +1,6 @@
 from django.urls import path, register_converter
 from django.http import Http404
-from .views import seeker, authenticate
+from .views import seeker, authenticate, spent_one_query
 import uuid
 
 class MyUUIDConverter:
@@ -21,5 +21,6 @@ register_converter(MyUUIDConverter,'myuuid')
 
 urlpatterns = [
     path('',seeker,name='seeker'),
-    path('token/<myuuid:uuid>/',authenticate,name='check_token'),
+    path('token/<myuuid:uuid>/auth/',authenticate,name='check_token'),
+    path('token/<myuuid:uuid>/use/',spent_one_query,name='use_token'),
 ]

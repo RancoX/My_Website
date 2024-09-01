@@ -47,10 +47,25 @@ def authenticate(request,uuid=None):
 
         # if found token, check if balance is sufficient
         if customer.used <= customer.balance:
+            return JsonResponse({'query_allowed':True,'queries_remaining':customer.balance})
+        return JsonResponse({'query_allowed':False,'queries_remaining':0})
+        # if no uuid, create one
+
+
+def spent_one_query(request,uuid=None):
+    if request.method == 'GET':
+        # if there is uuid included in request body
+        # verify existing token
+        try:
+            customer = SeekerCustomer.objects.get(pk=uuid)
+        except SeekerCustomer.DoesNotExist:
+            # correct format, wrong key
+            return JsonResponse({'query_allowed':False})
+
+        # if found token, check if balance is sufficient
+        if customer.used <= customer.balance:
             customer.used += 1
             customer.balance -= 1
             customer.save()
             return JsonResponse({'query_allowed':True,'queries_remaining':customer.balance})
         return JsonResponse({'query_allowed':False,'queries_remaining':0})
-        # if no uuid, create one
-
