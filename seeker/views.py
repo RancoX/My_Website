@@ -46,7 +46,7 @@ def authenticate(request,uuid=None):
             return JsonResponse({'query_allowed':False})
 
         # if found token, check if balance is sufficient
-        if customer.used <= customer.balance:
+        if customer.balance>0:
             return JsonResponse({'query_allowed':True,'queries_remaining':customer.balance})
         return JsonResponse({'query_allowed':False,'queries_remaining':0})
         # if no uuid, create one
@@ -63,7 +63,7 @@ def spent_one_query(request,uuid=None):
             return JsonResponse({'query_allowed':False})
 
         # if found token, check if balance is sufficient
-        if customer.used <= customer.balance:
+        if customer.balance>0:
             customer.used += 1
             customer.balance -= 1
             customer.save()
